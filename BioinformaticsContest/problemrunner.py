@@ -12,19 +12,20 @@ def main():
     parser.add_argument('problem', help='name of prblem function')
     # -s flags whether or not to use the sample input file
     parser.add_argument('-s', default=False, help='indicates to use sample input')
-    parser.add_argument('-v', default=True, help='do not validate number of outputs to number of inputs')
+    # parser.add_argument('-v', default=True, help='do not validate number of outputs to number of inputs')
     args = parser.parse_args()
 
     inputstring = './inputs/sampleinput.txt' if args.s else f'./inputs/{args.problem}.txt'
 
     # load input file
-    cases, lines = utils.load_input(inputstring)
+    lines = utils.load_input(inputstring)
 
     # call problem function on inputs
     results = getattr(problems, args.problem)(lines)
 
     # validate number of expected answers
-    if results and (args.v or len(results) == int(cases)):
+    if results:
+    # if results and (args.v or len(results) == int(cases)):
         # save output
         utils.save_output(f'./outputs/{args.problem}_output.txt', results)
     elif not args.s:
