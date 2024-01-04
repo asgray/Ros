@@ -1,12 +1,20 @@
 use std::env;
-use std::fs;
+use std::process;
+
+use ros::Config;
+use crate::commands::DNA::DNA::DNA;
+
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    dbg!(args);
+    
+    let config = Config::build(&args).unwrap_or_else(|err| {
+        println!("Problem parsing arguments: {err}");
+        process::exit(1)
+    });
 
-    let input = fs::read_to_string("../../../../_input.txt")
-        .expect("Couldn't Read File");
-
-    println!("Input:\n{input}");
+   if let Err(e) = DNA(config) {
+    println!("Application error: {e}");
+    process::exit(1);
+   }
 }
