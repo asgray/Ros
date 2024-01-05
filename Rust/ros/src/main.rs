@@ -1,20 +1,33 @@
-use std::env;
-use std::process;
+use clap::Parser;
 
-use ros::Config;
-use crate::commands::DNA::DNA::DNA;
+use ros::read_file;
+use crate::problems::dna::dna;
+use crate::problems::rna::rna;
 
+pub mod problems;
+
+#[derive(Parser)]
+#[command(name = "Ros")]
+#[command(author = "AG")]
+#[command(version = "1.0")]
+#[command(about = "Ros, but in Rust", long_about = None)]
+struct Cli {
+    #[arg(long)]
+    command: String,
+}
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    
-    let config = Config::build(&args).unwrap_or_else(|err| {
-        println!("Problem parsing arguments: {err}");
-        process::exit(1)
-    });
-
-   if let Err(e) = DNA(config) {
-    println!("Application error: {e}");
-    process::exit(1);
-   }
+    let cli = Cli::parse();
+    let command = cli.command;
+    let input = read_file();
+    println!("Command: {0}, Input: {1}", command, input);
+    if command == "DNA" {
+        dna()
+    } else 
+    if command == "RNA" {
+        rna()
+    } 
+    else {
+        println!("Unknown Command: {}", command)
+    }
 }
