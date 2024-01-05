@@ -1,3 +1,4 @@
-pub fn rna() {
-    println!("RNA file")
+pub fn rna(instr: String) -> String {
+    println!("RNA file");
+    instr
 }

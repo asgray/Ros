@@ -1,6 +1,6 @@
 use clap::Parser;
 
-use ros::read_file;
+use ros::{read_file, write_file};
 use crate::problems::dna::dna;
 use crate::problems::rna::rna;
 
@@ -20,14 +20,18 @@ fn main() {
     let cli = Cli::parse();
     let command = cli.command;
     let input = read_file();
+    let output: String;
     println!("Command: {0}, Input: {1}", command, input);
     if command == "DNA" {
-        dna()
+        output = dna(input)
     } else 
     if command == "RNA" {
-        rna()
+        output = rna(input)
     } 
     else {
-        println!("Unknown Command: {}", command)
+        println!("Unknown Command: {}", command);
+        return
     }
+    
+    write_file(output).unwrap();
 }
