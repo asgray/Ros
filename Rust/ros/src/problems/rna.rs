@@ -1,4 +1,3 @@
 pub fn rna(instr: String) -> String {
-    println!("RNA file");
-    instr
+   str::replace(&instr, "T", "U")
 }

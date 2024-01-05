@@ -4,7 +4,7 @@ use std::io::{Result, Write};
 pub fn read_file() -> String {
     let contents = fs::read_to_string("../../_input.txt")
         .expect("Reading Input Failed");
-    return contents
+    return contents.trim().to_string();
 }
 
 pub fn write_file(outstr: String) -> Result<()> {

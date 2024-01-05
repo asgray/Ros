@@ -1,8 +1,5 @@
 pub fn dna(instr: String) -> String {
-    let mut a = 0;
-    let mut t = 0;
-    let mut c = 0;
-    let mut g = 0;
+    let (mut a, mut t, mut c, mut g) = (0,0,0,0);
 
     for char in instr.chars(){
         if char== 'A' {
