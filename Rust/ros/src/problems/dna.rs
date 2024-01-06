@@ -1,3 +1,4 @@
+// Count the occurance of each nucleotide
 pub fn dna(instr: String) -> String {
     let (mut a, mut t, mut c, mut g) = (0,0,0,0);
 

@@ -1,3 +1,4 @@
+// Generate reverse complement of a given DNA sequence
 pub fn revc(instr: String) -> String {
    let mut rc = vec![];
    for char in instr.chars().rev() {

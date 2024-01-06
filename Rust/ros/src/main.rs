@@ -1,9 +1,10 @@
 use clap::Parser;
 
-use ros::{read_file, write_file};
+use ros::{read_file, write_file, read_fasta};
 use crate::problems::dna::dna;
 use crate::problems::rna::rna;
 use crate::problems::revc::revc;
+use crate::problems::gc::gc;
 
 pub mod problems;
 
@@ -20,13 +21,12 @@ struct Cli {
 fn main() {
     let cli = Cli::parse();
     let command = cli.command;
-    let input = read_file();
-    let output: String;
     println!("Command: {}", command);
-    output = match command.as_str() {
-        "DNA" => dna(input),
-        "RNA" => rna(input),
-        "REVC"=> revc(input),
+    let output: String = match command.as_str() {
+        "DNA"  => dna(read_file()),
+        "RNA"  => rna(read_file()),
+        "REVC" => revc(read_file()),
+        "GC"   => gc(read_fasta()),
         _ =>  {
             println!("Unknown Command: {}", command);
             return
